@@ -1,5 +1,5 @@
 import './main.js';
-import './create-new-photo.js';
+import './create-new-book.js';
 import './forma.js';
 import './map.js';
 import './popup.js';
