@@ -1,10 +1,11 @@
 import{keksoBook} from './create-new-book.js'
 
+
 const pattern =document.querySelector('#card').content.querySelector('.popup');
 const ListFragment = document.createDocumentFragment();
 const newAds=keksoBook;
 
-const renderPopup=()=>{
+
 newAds.forEach((offer) => {
  const clonElement = pattern.cloneNode(true);
 
@@ -26,21 +27,23 @@ newAds.forEach((offer) => {
  }}}}
 
  const popupFeatures=clonElement.querySelector('.popup__features');
- const popupFeature=popupFeatures.children;
+ const popupFeature=popupFeatures.querySelectorAll('.popup__feature');
  const offerFeatures=offer.offer.features;
- const isFeatures = (feature) => offerFeatures.some((value) => value == feature);
 
-offerFeatures.forEach((value)=>{
-  if(value && offerFeatures.length){
-  if(isFeatures(value)){
-for(const itemLi of popupFeature){
-  if(!itemLi.classList.contains(`popup__feature--${value}`)){
-    itemLi.remove;
-  }
-}
-  }
-  }else{popupFeature.remove;}
-});
+console.log(offerFeatures);
+console.log(popupFeature);
+  if(offerFeatures.length){
+  const modifiers=offerFeatures.map((feature)=>`popup__feature--${feature}`);
+  console.log(modifiers);
+  popupFeature.forEach((itemLi)=>{
+    const modifier=itemLi.classList[1];
+    console.log(modifier);
+    if(!modifiers.includes(modifier)){
+      console.log(itemLi);
+     itemLi.remove();
+    }
+  });
+  }else{popupFeature.remove();}
 
 clonElement.querySelector('.popup__description').textContent=offer.offer.description;
 
@@ -64,5 +67,4 @@ ListFragment.appendChild(clonElement);
 const mapCanvas=document.querySelector('#map-canvas');
 mapCanvas.appendChild(ListFragment);
 
-};
-renderPopup();
+
