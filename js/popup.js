@@ -30,16 +30,11 @@ newAds.forEach((offer) => {
  const popupFeature=popupFeatures.querySelectorAll('.popup__feature');
  const offerFeatures=offer.offer.features;
 
-console.log(offerFeatures);
-console.log(popupFeature);
   if(offerFeatures.length){
   const modifiers=offerFeatures.map((feature)=>`popup__feature--${feature}`);
-  console.log(modifiers);
   popupFeature.forEach((itemLi)=>{
     const modifier=itemLi.classList[1];
-    console.log(modifier);
     if(!modifiers.includes(modifier)){
-      console.log(itemLi);
      itemLi.remove();
     }
   });
