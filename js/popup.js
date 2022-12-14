@@ -6,7 +6,7 @@ const ListFragment = document.createDocumentFragment();
 const newAds=keksoBook;
 
 
-newAds.forEach((offer) => {
+const newPopup=newAds.forEach((offer) => {
  const clonElement = pattern.cloneNode(true);
 
  clonElement.querySelector('.popup__title').textContent=offer.offer.title;
@@ -59,7 +59,8 @@ clonElement.querySelector('.popup__avatar').src=offer.author.avatar;
 ListFragment.appendChild(clonElement);
 });
 
-const mapCanvas=document.querySelector('#map-canvas');
-mapCanvas.appendChild(ListFragment);
 
+//const mapCanvas=document.querySelector('#map-canvas');
+//mapCanvas.appendChild(ListFragment);
+export{newPopup};
 

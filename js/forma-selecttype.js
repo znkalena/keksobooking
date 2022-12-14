@@ -2,15 +2,18 @@ const forma=document.querySelector('.ad-form');
 const selectType=forma.querySelector('#type');
 const optionsType=selectType.querySelectorAll('option');
 const inputPrice=forma.querySelector('#price');
+const maxLength=7;
 
-
-inputPrice.addEventListener('input',function(){
-    const inputValueLength=inputPrice.value.length;
-    if(inputValueLength>7){
-        inputPrice.disabled=true;
-        inputPrice.placeholder='error';
-}else{inputPrice.disabled=false;}
-});
+inputPrice.addEventListener('input',()=>{
+    const valueLength=inputPrice.value.length;
+    if(valueLength>maxLength){
+    inputPrice.setCustomValidity('цена не может быть больше 1000000 рублей' );
+    }
+    else{
+      inputPrice.setCustomValidity('');
+    }
+    inputPrice.reportValidity();
+  });
 const minPrice={
     bungalow:0,
     flat:1000,
