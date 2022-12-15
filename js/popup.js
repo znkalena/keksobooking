@@ -5,8 +5,8 @@ const pattern =document.querySelector('#card').content.querySelector('.popup');
 const ListFragment = document.createDocumentFragment();
 const newAds=keksoBook;
 
-
-const newPopup=newAds.forEach((offer) => {
+const createPopup=function(){
+newAds.forEach((offer) => {
  const clonElement = pattern.cloneNode(true);
 
  clonElement.querySelector('.popup__title').textContent=offer.offer.title;
@@ -52,15 +52,15 @@ clonElement.querySelector('.popup__description').textContent=offer.offer.descrip
     const newImage=image.cloneNode(false);
     newImage.src =offferPhotos[i];
 }
- }
 
 clonElement.querySelector('.popup__avatar').src=offer.author.avatar;
 
 ListFragment.appendChild(clonElement);
-});
-
+return ListFragment;
+}});
+};
 
 //const mapCanvas=document.querySelector('#map-canvas');
 //mapCanvas.appendChild(ListFragment);
-export{newPopup};
+export{createPopup,ListFragment};
 

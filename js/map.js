@@ -1,3 +1,7 @@
+import './popup.js';
+import { createPopup } from './popup.js';
+import {ListFragment} from './popup.js'
+
 const formaAd=document.querySelector('.ad-form');
 const adFieldsets=formaAd.querySelectorAll('fieldset');
 const formaMap=document.querySelector('.map__filters');
@@ -55,11 +59,9 @@ const map=L.map('map-canvas')
     },
     {
       draggable:true,
+      icon:mainIcon,
     },
-    {
-      mainIcon,
-    },
-  );
+    );
   mainMarker.addTo(map);
   mainMarker.on('moveend',(evt)=>{
   let coordinates=evt.target.getLatLng();
@@ -82,9 +84,12 @@ const map=L.map('map-canvas')
         lng:139.56,},
 ];
 const createCustomPopup = ({lat, lng, title}) => `<section class="balloon">
-  <h3 class="balloon__title">${title}</h3>
+ <h3 class="balloon__title">${title}</h3>
   <p class="balloon__lat-lng">Координаты: ${lat}, ${lng}</p>
   </section>`;
+createPopup()
+console.log(ListFragment);
+
   points.forEach((point)=>{
    const {lat,lng}=point;
    const icon = L.icon({
@@ -104,7 +109,7 @@ const newMarker=L.marker(
         draggable:true,
       },
 );
-newMarker.addTo(map).bindPopup(createCustomPopup(point),
+newMarker.addTo(map).bindPopup(createCustomPopup,
 {
     keepInView: true,
   },
