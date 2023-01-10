@@ -1,35 +1,8 @@
-import './popup.js';
 import { createPopup} from './popup.js';
+import { formsAvilable,formaAd } from './user-form.js';
+import { createFetch } from './fetch.js';
 
-
-const formaAd=document.querySelector('.ad-form');
-const adFieldsets=formaAd.querySelectorAll('fieldset');
-const formaMap=document.querySelector('.map__filters');
-const mapSelects=formaMap.querySelectorAll('select');
 const adressInput=formaAd.querySelector('#address');
-
-const formsDisable=()=>{
-formaAd.classList.add('ad-form--disabled');
-formaMap.classList.add('map-filters--disabled');
-adFieldsets.forEach((fieldset)=>{
-    fieldset.disabled=true;
-});
-mapSelects.forEach((select)=>{
-    select.disabled=true;
-});
-};
-  const formsAvilable=()=>{
-     formaAd.classList.remove('ad-form--disabled');
-    formaMap.classList.remove('map-filters--disabled');
-    adFieldsets.forEach((fieldset)=>{
-        fieldset.disabled=false;
-    });
-    mapSelects.forEach((select)=>{
-        select.disabled=false;
-    });
-    };
-formsDisable();
-
 const map=L.map('map-canvas')
 .on('load', () => {
     console.log('Карта инициализирована')
@@ -100,7 +73,7 @@ const newMarker=L.marker(
         icon,
       },
 );
-newMarker.addTo(map).bindPopup(createPopup(),
+newMarker.addTo(map).bindPopup(createPopup(createFetch()),
 {
     keepInView: true,
   },
@@ -114,9 +87,9 @@ newMarker.addTo(map).bindPopup(createPopup(),
   paragrafBallon.textContent=`координаты:${lat},${lng}`;
 
 
-  //for(fragment of fragments){
- //   paragrafBallon.appendChild(fragment);
-//  };
+  for(fragment of fragments){
+    paragrafBallon.appendChild(fragment);
+  };
 
 }*/
 //шаблонные строки `<section class="balloon">

@@ -1,10 +1,12 @@
 import './fetch.js';
 import './create-new-book.js';
-import './forma-selectroom.js';
 import './map.js';
-
 import './message-succes.js';
 import './message-error.js';
-import './forma-checktime.js';
 import './map.js';
+import './user-form.js';
+import './forma-selectroom.js';
+import './forma-title.js';
+import './forma-checktime.js';
 import './forma-selecttype.js';
+import './popup.js';
