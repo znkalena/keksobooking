@@ -1,34 +1,37 @@
-import{keksoBook} from './create-new-book.js'
+import{createFetch} from './fetch.js'
 
 
 const pattern =document.querySelector('#card').content.querySelector('.popup');
 const ListFragment = document.createDocumentFragment();
-const newAds=keksoBook;
+
 
 const createPopup=function(){
-newAds.forEach((offer) => {
+  const newAdds=createFetch(
+    (newAdd)=>{console.log(newAdd)},(err)=>{console.log(err);}
+  );
+for(let i=0;i<newAdds.length;i++ ){
+  console.log(newAdds[i]);
  const clonElement = pattern.cloneNode(true);
-
- clonElement.querySelector('.popup__title').textContent=offer.offer.title;
- clonElement.querySelector('.popup__text--address').textContent=offer.offer.adress;
- clonElement.querySelector('.popup__text--price').textContent=offer.offer.price;
- clonElement.querySelector('.popup__text--capacity').textContent=`${offer.offer.rooms}комнаты для${offer.offer.guests}гостей`;
- clonElement.querySelector('.popup__text--time').textContent=`Заезд после${offer.offer.checkin},выезд до${offer.offer.checkout}`
+ clonElement.querySelector('.popup__title').textContent=newAdds[i].offer.title;
+ clonElement.querySelector('.popup__text--address').textContent=newAdds[i].offer.adress;
+ clonElement.querySelector('.popup__text--price').textContent=newAdds[i].offer.price;
+ clonElement.querySelector('.popup__text--capacity').textContent=`${newAdds[i].offer.rooms}комнаты для${newAdds[i].offer.guests}гостей`;
+ clonElement.querySelector('.popup__text--time').textContent=`Заезд после${newAdds[i].offer.checkin},выезд до${newAdds[i].offer.checkout}`
  const typeAppartment=clonElement.querySelector('.popup__type');
 
- if(offer.offer.type==='flat'){
+ if(newAdds[i].offer.type==='flat'){
   typeAppartment.textContent='Квартира';
- if(offer.offer.type==='bungalow'){
+ if(newAdds[i].offer.type==='bungalow'){
   typeAppartment.textContent='Бунгало';
- if(offer.offer.type==='house'){
+ if(newAdds[i].offer.type==='house'){
   typeAppartment.textContent='Дом';
- if(offer.offer.type==='palace'){
+ if(newAdds[i].offer.type==='palace'){
   typeAppartment.textContent='Дворец';
  }}}}
 
  const popupFeatures=clonElement.querySelector('.popup__features');
  const popupFeature=popupFeatures.querySelectorAll('.popup__feature');
- const offerFeatures=offer.offer.features;
+ const offerFeatures=newAdds[i].offer.features;
 
   if(offerFeatures.length){
   const modifiers=offerFeatures.map((feature)=>`popup__feature--${feature}`);
@@ -40,9 +43,9 @@ newAds.forEach((offer) => {
   });
   }else{popupFeature.remove();}
 
-clonElement.querySelector('.popup__description').textContent=offer.offer.description;
+clonElement.querySelector('.popup__description').textContent=newAdds[i].offer.description;
 
- const offferPhotos=offer.offer.photos;
+ const offferPhotos=newAdds[i].offer.photos;
  const image=clonElement.querySelector('.popup__photo');
  for(let i=0;i<offferPhotos.length;i++){
   if(i<1){
@@ -53,14 +56,12 @@ clonElement.querySelector('.popup__description').textContent=offer.offer.descrip
     newImage.src =offferPhotos[i];
 }
 
-clonElement.querySelector('.popup__avatar').src=offer.author.avatar;
+clonElement.querySelector('.popup__avatar').src=newAdds[i].author.avatar;
 
 ListFragment.appendChild(clonElement);
-return ListFragment;
-}});
-};
-
+}}};
+console.log(ListFragment)
 //const mapCanvas=document.querySelector('#map-canvas');
 //mapCanvas.appendChild(ListFragment);
-export{createPopup,ListFragment};
+export{createPopup};
 

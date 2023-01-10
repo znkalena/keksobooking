@@ -1,4 +1,4 @@
-import './main.js';
+import './fetch.js';
 import './create-new-book.js';
 import './forma-selectroom.js';
 import './map.js';

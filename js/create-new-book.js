@@ -1,4 +1,4 @@
-import{returnNumber} from './util.js';
+/*import{returnNumber} from './util.js';
 import{descriptions,type,time,features,title,photos,} from './data.js';
 
 const countAd =10;
@@ -52,7 +52,6 @@ const createNewAd =()=>{
     },
   }
 };
-const keksoBook= new Array(countAd).fill(null).map(()=>createNewAd());
+const keksoBook= new Array(countAd).fill(null).map(()=>createNewAd());*/
 
-console.log(keksoBook);
-export{keksoBook};
+

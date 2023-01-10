@@ -1,6 +1,6 @@
 import './popup.js';
-import { createPopup } from './popup.js';
-import {ListFragment} from './popup.js'
+import { createPopup} from './popup.js';
+
 
 const formaAd=document.querySelector('.ad-form');
 const adFieldsets=formaAd.querySelectorAll('fieldset');
@@ -68,7 +68,6 @@ const map=L.map('map-canvas')
   adressInput.value=coordinates;
   });
 
-
    const points=[
     {
     title:'hotel1',
@@ -83,12 +82,6 @@ const map=L.map('map-canvas')
         lat:35.38,
         lng:139.56,},
 ];
-const createCustomPopup = ({lat, lng, title}) => `<section class="balloon">
- <h3 class="balloon__title">${title}</h3>
-  <p class="balloon__lat-lng">Координаты: ${lat}, ${lng}</p>
-  </section>`;
-createPopup()
-console.log(ListFragment);
 
   points.forEach((point)=>{
    const {lat,lng}=point;
@@ -103,15 +96,40 @@ const newMarker=L.marker(
     lng,
     },
     {
-        icon,
-    },
-    {
         draggable:true,
+        icon,
       },
 );
-newMarker.addTo(map).bindPopup(createCustomPopup,
+newMarker.addTo(map).bindPopup(createPopup(),
 {
     keepInView: true,
   },
 );
  });
+/*const createCustomPopup = ({lat,lng})=>{
+
+  const balloonTemplate=document.querySelector('#balloon').content.querySelector('.balloon');
+  const balloon=balloonTemplate.cloneNode(true);
+  const paragrafBallon=balloon.querySelector('.balloon__lat-lng');
+  paragrafBallon.textContent=`координаты:${lat},${lng}`;
+
+
+  //for(fragment of fragments){
+ //   paragrafBallon.appendChild(fragment);
+//  };
+
+}*/
+//шаблонные строки `<section class="balloon">
+// <h3 class="balloon__title">${title}</h3>
+//  <p class="balloon__lat-lng">Координаты: ${lat}, ${lng}</p>
+//  </section>`;
+/*data.forEach((item) => {
+  const marker = L.marker(
+    item.location,
+    icon: // тут настройки маркера на карте
+  );
+
+  marker
+    .addTo(layerForMarkers)
+    .bindPopup(createPopup(item));
+});*/
