@@ -1,6 +1,6 @@
 import { createPopup} from './popup.js';
 import { formsAvilable,formaAd } from './user-form.js';
-import { createFetch } from './fetch.js';
+
 
 const adressInput=formaAd.querySelector('#address');
 const map=L.map('map-canvas')
@@ -73,7 +73,7 @@ const newMarker=L.marker(
         icon,
       },
 );
-newMarker.addTo(map).bindPopup(createPopup(createFetch()),
+newMarker.addTo(map).bindPopup(createPopup(),
 {
     keepInView: true,
   },

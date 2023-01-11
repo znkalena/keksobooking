@@ -1,10 +1,13 @@
 import {returnNumber} from "./util.js"
+import { createFetch } from "./fetch.js";
+
 const pattern =document.querySelector('#card').content.querySelector('.popup');
 const ListFragment = document.createDocumentFragment();
-
+const newAdds=createFetch();
+console.log(newAdds);
 
 const createPopup=(newAdds)=>{
-for(let newAdd of newAdds){
+newAdds.forEach((newAdd)=>{
  const clonElement = pattern.cloneNode(true);
  clonElement.querySelector('.popup__title').textContent=newAdd.offer.title;
  clonElement.querySelector('.popup__text--address').textContent=newAdd.offer.address;
@@ -55,8 +58,8 @@ clonElement.querySelector('.popup__avatar').src=newAdd.author.avatar;
 
 ListFragment.appendChild(clonElement);
 console.log(ListFragment);
-
-}}};
+return ListFragment
+}})};
 
 //const mapCanvas=document.querySelector('#map-canvas');
 //mapCanvas.appendChild(ListFragment);
