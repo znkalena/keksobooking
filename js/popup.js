@@ -1,13 +1,72 @@
 import {returnNumber} from "./util.js"
 import { createFetch } from "./fetch.js";
 
-const pattern =document.querySelector('#card').content.querySelector('.popup');
-const ListFragment = document.createDocumentFragment();
+
 const newAdds=createFetch();
 console.log(newAdds);
+const numberAdds=10;
+
+const getAddRank=(newAdd)=>{
+  const formFilters=document.querySelector('.map__filters');
+  const selectHousingType=formFilters.querySelector('#housing-type');
+  const selectHousingPprice=formFilters.querySelector('#housing-price');
+  const selectHousingGuests=formFilters.querySelector('#housing-guests');
+  const fieldsetMapFeatures=document.querySelector('.map__features');
+  const inputFilterWifi=fieldsetMapFeatures.querySelector('#filter-wifi');
+  const inputFilterDishwasher=fieldsetMapFeatures.querySelector('#filter-dishwasher');
+  const inputfFlterParking=fieldsetMapFeatures.querySelector('#filter-parking');
+  const inputFilterWasher=fieldsetMapFeatures.querySelector('#filter-washer');
+  const inputFilterElevator=fieldsetMapFeatures.querySelector('#filter-elevator');
+  const inputFilterConditioner=fieldsetMapFeatures.querySelector('#filter-conditioner');
+
+  let rank=0;
+  if(newAdd.offer.type===selectHousingType){
+    rank +=2;
+  }
+  if(newAdd.offer.price===selectHousingPprice.value){
+   rank +=2;
+  }
+  if(newAdd.offer.guests===selectHousingGuests.value){
+    rank +=2;
+  }
+  if(newAdd.offer.features.includes(inputFilterWifi.value)){
+    rank +=1;
+  }
+  if(newAdd.offer.features.includes(inputFilterDishwasher.value)){
+    rank +=1;
+  }
+  if(newAdd.offer.features.includes(inputFilterElevator.value)){
+    rank +=1;
+  }
+  if(newAdd.offer.features.includes(inputFilterWifi.value)){
+    rank +=1;
+  }
+  if(newAdd.offer.features.includes(inputFilterWasher.value)){
+    rank +=1;
+  }
+  if(newAdd.offer.features.includes(inputfFlterParking.value)){
+    rank +=1;
+  }
+  if(newAdd.offer.features.includes(inputFilterConditioner.value)){
+    rank +=1;
+  }
+  console.log(rank);
+  return rank;
+};
+
+const compareAdds=(addA,addB)=>{
+  const rankA=getAddRank(addA);
+  const rankB=getAddRank(addB);
+  return rankB-rankA;
+}
+const ListFragment = document.createDocumentFragment();
 
 const createPopup=(newAdds)=>{
-newAdds.forEach((newAdd)=>{
+  const pattern =document.querySelector('#card').content.querySelector('.popup');
+  newAdds.slice()
+.sort(compareAdds)
+.slice(0,numberAdds)
+.forEach((newAdd)=>{
  const clonElement = pattern.cloneNode(true);
  clonElement.querySelector('.popup__title').textContent=newAdd.offer.title;
  clonElement.querySelector('.popup__text--address').textContent=newAdd.offer.address;

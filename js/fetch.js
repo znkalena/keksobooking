@@ -1,4 +1,4 @@
-const numberAdds=4;
+
 const url='https://23.javascript.pages.academy/keksobooking/data';
 
 const createFetch=()=>{
@@ -8,7 +8,7 @@ return fetch(url,{method:'Get',credentials: 'same-origin',})
 return response.json()}
 throw new Error(`${response.status} ${response.statusText}`)
   })
-.then((newAdds)=>{console.log(newAdds.slice(0,numberAdds));})
+.then((newAdds)=>{console.log(newAdds);})
 .catch((err)=>{console.log(err);})
 };
 

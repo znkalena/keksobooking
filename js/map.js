@@ -1,7 +1,17 @@
 import { createPopup} from './popup.js';
 import { formsAvilable,formaAd } from './user-form.js';
 
+const createCustomPopup = ({lat,lng})=>{
+  const popups=createPopup();
+  const balloonTemplate=document.querySelector('#balloon').content.querySelector('.balloon');
+  const balloon=balloonTemplate.cloneNode(true);
+  const paragrafBallon=balloon.querySelector('.balloon__lat-lng');
+  paragrafBallon.textContent=`координаты:${lat},${lng}`;
 
+  popups.forEach((popup)=>{
+    paragrafBallon.appendChild(popup);
+  })
+};
 const adressInput=formaAd.querySelector('#address');
 const map=L.map('map-canvas')
 .on('load', () => {
@@ -73,25 +83,13 @@ const newMarker=L.marker(
         icon,
       },
 );
-newMarker.addTo(map).bindPopup(createPopup(),
+newMarker.addTo(map).bindPopup(createCustomPopup({lat,lng}),
 {
     keepInView: true,
   },
 );
  });
-/*const createCustomPopup = ({lat,lng})=>{
 
-  const balloonTemplate=document.querySelector('#balloon').content.querySelector('.balloon');
-  const balloon=balloonTemplate.cloneNode(true);
-  const paragrafBallon=balloon.querySelector('.balloon__lat-lng');
-  paragrafBallon.textContent=`координаты:${lat},${lng}`;
-
-
-  for(fragment of fragments){
-    paragrafBallon.appendChild(fragment);
-  };
-
-}*/
 //шаблонные строки `<section class="balloon">
 // <h3 class="balloon__title">${title}</h3>
 //  <p class="balloon__lat-lng">Координаты: ${lat}, ${lng}</p>
