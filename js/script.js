@@ -6,3 +6,4 @@ import './message-error.js';
 import './map.js';
 import './user-form.js';
 import './popup.js';
+import './avatar.js';
