@@ -1,9 +1,6 @@
 import {returnNumber} from "./util.js"
-import { createFetch } from "./fetch.js";
+import { getNewAdds } from "./fetch.js";
 
-
-const newAdds=createFetch();
-console.log(newAdds);
 const numberAdds=10;
 
 const getAddRank=(newAdd)=>{
@@ -120,7 +117,8 @@ console.log(ListFragment);
 return ListFragment
 }})};
 
+const dataForMap=getNewAdds(createPopup)
 //const mapCanvas=document.querySelector('#map-canvas');
 //mapCanvas.appendChild(ListFragment);
-export{createPopup};
+export{dataForMap};
 
