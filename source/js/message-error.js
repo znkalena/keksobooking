@@ -13,8 +13,8 @@ const showError=(message)=>{
 
   document.body.append(alertConteiner);
 
- setTimeout(()=>{
+  setTimeout(()=>{
   alertConteiner.remove();
- },AlertShowTime);
+  },AlertShowTime);
 }
 export{showError}

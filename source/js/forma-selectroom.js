@@ -3,6 +3,18 @@ const optionsRooms=selectRooms.querySelectorAll('option');
 const selectCapacity=document.querySelector('#capacity');
 const optionsCapacity=selectCapacity.querySelectorAll('option');
 
+if(optionsRooms[0].selected){
+optionsCapacity[2].selected = true;
+}
+if(optionsRooms[1].selected){
+  optionsCapacity[1].selected = true;
+  }
+  if(optionsRooms[2].selected){
+    optionsCapacity[0].selected = true;
+    }if(optionsRooms[3].selected){
+      optionsCapacity[3].selected =true;
+    }
+
 
 selectRooms.addEventListener('change',function(){
     for(let i=0;i<=3;i++){
@@ -19,6 +31,7 @@ else if(optionsRooms[1].selected){
 else if(optionsRooms[2].selected){
     optionsCapacity[3].disabled=true;
 }else if(optionsRooms[3].selected){
+    optionsCapacity[3].selected =true;
     optionsCapacity[1].disabled=true;
     optionsCapacity[2].disabled=true;
     optionsCapacity[0].disabled=true;

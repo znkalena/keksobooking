@@ -1,7 +1,7 @@
 import {returnNumber} from "./util.js"
-import { getNewAdds } from "./fetch.js";
+import { getNewAdds } from "./Api.js";
+import { COUNT_ADDS } from "./data.js";
 
-const numberAdds=10;
 
 const getAddRank=(newAdd)=>{
   const formFilters=document.querySelector('.map__filters');
@@ -56,13 +56,14 @@ const compareAdds=(addA,addB)=>{
   const rankB=getAddRank(addB);
   return rankB-rankA;
 }
+
 const ListFragment = document.createDocumentFragment();
 
 const createPopup=(newAdds)=>{
   const pattern =document.querySelector('#card').content.querySelector('.popup');
   newAdds.slice()
 .sort(compareAdds)
-.slice(0,numberAdds)
+.slice(0,COUNT_ADDS)
 .forEach((newAdd)=>{
  const clonElement = pattern.cloneNode(true);
  clonElement.querySelector('.popup__title').textContent=newAdd.offer.title;
@@ -113,7 +114,7 @@ clonElement.querySelector('.popup__avatar').src=newAdd.author.avatar;
 }else{clonElement.querySelector('.popup__avatar').src=`img/avatars/user0${returnNumber(0,8)}.png`}
 
 ListFragment.appendChild(clonElement);
-console.log(ListFragment);
+
 return ListFragment
 }})};
 

@@ -6,8 +6,16 @@
   <link rel="stylesheet" href="css/style.css">
   <link rel="shortcut icon" href="favicon.ico" type="image/x-icon">
   <link rel="stylesheet" href="leaflet/leaflet/leaflet.css">
-   <title>Кексобукинг</title>
+  <title>Кексобукинг</title>
+
+  <script src="./source/js/script.js" type="module"></script>
+<!--Leaflet-->
+  <script src="leaflet/leaflet/leaflet.js" integrity="sha512-XQoYMqMTK8LvdxXYG3nZ448hOEQiglfqkJs1NOQV44cWnUrBc8PkAOcXy20w0vlaXaVUearIOBhiXZ5V3ynxwA=="
+  crossorigin=""></script>
+<!--lodash-->
+  <script src="https://cdn.jsdelivr.net/npm/lodash@4.17.20/lodash.min.js"></script>
 </head>
+
 <body>
 
   <main>
@@ -63,7 +71,7 @@
             <label class="map__feature map__feature--elevator" for="filter-elevator">Лифт</label>
             <input type="checkbox" name="features" value="conditioner" id="filter-conditioner" class="map__checkbox visually-hidden">
             <label class="map__feature map__feature--conditioner" for="filter-conditioner">Кондиционер</label>
-           </fieldset>
+          </fieldset>
         </form>
       </div>
     </section>
@@ -71,7 +79,7 @@
     <!-- Форма объявления -->
     <section class="notice">
       <h2 class="notice__title">Ваше объявление</h2>
-      <form class="ad-form" method="post"action="https://23.javascript.pages.academy/keksobooking" enctype="multipart/form-data" autocomplete="off">
+      <form class="ad-form" method="post" action="https://23.javascript.pages.academy/keksobooking" enctype="multipart/form-data" autocomplete="off">
         <fieldset class="ad-form-header">
           <legend class="ad-form-header__title">Ваша фотография (для карты)</legend>
           <div class="ad-form-header__upload">
@@ -91,7 +99,7 @@
         </fieldset>
         <fieldset class="ad-form__element ad-form__element--wide">
           <label class="ad-form__label" for="address">Адрес (координаты)</label>
-          <input id="address" name="address" type="text" required>
+          <input id="address" name="address" type="text" disabled>
         </fieldset>
         <fieldset class="ad-form__element">
           <label class="ad-form__label" for="type">Тип жилья</label>
@@ -131,7 +139,7 @@
         <fieldset class="ad-form__element">
           <label class="ad-form__label" for="capacity">Количество мест</label>
           <select id="capacity" name="capacity">
-            <option value="3" selected>для 3 гостей</option>
+            <option value="3" >для 3 гостей</option>
             <option value="2">для 2 гостей</option>
             <option value="1">для 1 гостя</option>
             <option value="0">не для гостей</option>
@@ -234,9 +242,6 @@
       <button type="button" class="error__button">Попробовать снова</button>
     </div>
   </template>
-<script src="./js/main.bundle.js"></script>
-<!--<script src="leaflet/leaflet/leaflet.js.map"></script>-->
-<script src="leaflet/leaflet/leaflet.js"integrity="sha512-XQoYMqMTK8LvdxXYG3nZ448hOEQiglfqkJs1NOQV44cWnUrBc8PkAOcXy20w0vlaXaVUearIOBhiXZ5V3ynxwA=="
-crossorigin=""></script>
+
 </body>
 </html>

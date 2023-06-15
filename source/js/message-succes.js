@@ -12,10 +12,10 @@ const showSuccess=(message)=>{
   alertConteiner.style.fontSize='30px';
 
 
- document.body.append(alertConteiner);
+  document.body.append(alertConteiner);
 
   setTimeout(()=>{
   alertConteiner.remove();
- },AlertShowTime);
+  },AlertShowTime);
 }
 export{showSuccess}

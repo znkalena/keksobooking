@@ -1,27 +1,21 @@
-import { createPopup} from './popup.js';
-import { formsAvilable,formaAd } from './user-form.js';
+import {createNewAdds } from './create-randomarray.js';
+import {formsAvilable} from './user-form.js';
+import {createPopup} from './createpopup.js';
+import { mountAdd } from './mount-adds.js';
 
-const createCustomPopup = ({lat,lng})=>{
-  const popups=createPopup();
-  const balloonTemplate=document.querySelector('#balloon').content.querySelector('.balloon');
-  const balloon=balloonTemplate.cloneNode(true);
-  const paragrafBallon=balloon.querySelector('.balloon__lat-lng');
-  paragrafBallon.textContent=`координаты:${lat},${lng}`;
 
-  popups.forEach((popup)=>{
-    paragrafBallon.appendChild(popup);
-  })
-};
-const adressInput=formaAd.querySelector('#address');
-const map=L.map('map-canvas')
+const listAdds = createNewAdds();
+console.log(listAdds);
+
+const map =L.map('map-canvas')
 .on('load', () => {
-    console.log('Карта инициализирована')
-    formsAvilable();
-  })
-.setView({
-    lat: 35.42,
-    lng: 139.36,
+  formsAvilable();
+})
+  .setView({
+    lat: 59.92749,
+    lng: 30.31127,
   }, 10);
+
   L.tileLayer(
     'https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png',
     {
@@ -29,78 +23,56 @@ const map=L.map('map-canvas')
     },
   ).addTo(map);
 
-  const mainIcon = L.icon({
-    iconUrl:'leaflet/img/main-pin.svg',
+  const mainPinIcon = L.icon({
+    iconUrl: 'https://assets.htmlacademy.ru/content/intensive/javascript-1/demo/interactive-map/main-pin.svg',
     iconSize: [52, 52],
     iconAnchor: [26, 52],
   });
 
-  const mainMarker = L.marker(
+  const mainPinMarker = L.marker(
     {
-      lat: 35.42,
-      lng: 139.36,
+      lat: 59.96831,
+      lng: 30.31748,
     },
     {
-      draggable:true,
-      icon:mainIcon,
+      draggable: true,
+      icon: mainPinIcon,
     },
-    );
-  mainMarker.addTo(map);
-  mainMarker.on('moveend',(evt)=>{
-  let coordinates=evt.target.getLatLng();
-  adressInput.value=coordinates;
+  );
+
+  const adressInput =document.querySelector('#address');
+
+  let adress = mainPinMarker.on('moveend', (evt) => {
+    adressInput.value = evt.target.getLatLng();
+    return adressInput.value;
   });
 
-   const points=[
-    {
-    title:'hotel1',
-    lat:35.47,
-    lng:139.42,},
-    {
-    title:'hotel2',
-    lat:35.51,
-    lng:139.54,},
-    {
-        title:'hotel3',
-        lat:35.38,
-        lng:139.56,},
-];
+  mainPinMarker.addTo(map)
+  .bindPopup(createPopup(adress));
 
-  points.forEach((point)=>{
-   const {lat,lng}=point;
-   const icon = L.icon({
-    iconUrl:'leaflet/img/pin.svg',
-    iconSize: [40, 40],
-    iconAnchor: [20, 40],
-  });
-const newMarker=L.marker(
+
+  listAdds.forEach((point) =>{
+    const icon = L.icon({
+      iconUrl: 'https://assets.htmlacademy.ru/content/intensive/javascript-1/demo/interactive-map/pin.svg',
+      iconSize: [40, 40],
+      iconAnchor: [20, 40],
+    });
+
+  const marker=L.marker(
     {
-    lat,
-    lng,
+      lat:point.location.x,
+      lng:point.location.y,
     },
     {
-        draggable:true,
-        icon,
-      },
-);
-newMarker.addTo(map).bindPopup(createCustomPopup({lat,lng}),
-{
-    keepInView: true,
-  },
-);
- });
-
-//шаблонные строки `<section class="balloon">
-// <h3 class="balloon__title">${title}</h3>
-//  <p class="balloon__lat-lng">Координаты: ${lat}, ${lng}</p>
-//  </section>`;
-/*data.forEach((item) => {
-  const marker = L.marker(
-    item.location,
-    icon: // тут настройки маркера на карте
+      icon,
+    }
   );
 
   marker
-    .addTo(layerForMarkers)
-    .bindPopup(createPopup(item));
-});*/
+  .addTo(map)
+  .bindPopup(mountAdd(point));
+});
+
+
+
+  //mainPinMarker.remove();

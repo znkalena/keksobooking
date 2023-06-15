@@ -1,21 +1,21 @@
-/*import{returnNumber} from './util.js';
-import{descriptions,type,time,features,title,photos,} from './data.js';
+import{returnNumber} from './util.js';
+import{DESCRIPTIONS,TYPES,TIMES,FEATURES,TITLES,PHOTOS,COUNT_ADDS} from './data.js';
 
-const countAd =10;
 const minRoom=1;
 const maxRoom=6;
 const minGest=1;
 const maxGest=20;
-const minX=35;
-const minY=139;
-const minNumberForX=65;
-const minNumberForY=70;
-const maxNumberForX=70;
-const maxNumberForY=80;
+const minX=59;
+const minY=30;
+const minNumberForX=90;
+const minNumberForY=30;
+const maxNumberForX=100;
+const maxNumberForY=40;
 
 const getRandomArrayElement=(elements)=>{
     return elements[returnNumber(0,elements.length-1)]
     };
+
 
 const createObjectLocationX=()=>{
     let x=minX+'.'+returnNumber(minNumberForX,maxNumberForX);
@@ -26,7 +26,7 @@ const createObjectLocationY=()=>{
     return y;
 
 };
-const createNewAd =()=>{
+export const createNewAdd =()=>{
   let longitude=createObjectLocationY();
   let latitude=createObjectLocationX();
   return {
@@ -34,24 +34,25 @@ const createNewAd =()=>{
       avatar:`img/avatars/user0${returnNumber(0,8)}.png`
     },
     offer:
-    { title:getRandomArrayElement(title),
+    { title:getRandomArrayElement(TITLES),
       address:`${latitude},${longitude}`,
       price:returnNumber(20,500)+'$/ночь',
-      type:getRandomArrayElement(type),
+      type:getRandomArrayElement(TYPES),
       rooms:returnNumber(minRoom,maxRoom),
       guests:returnNumber(minGest,maxGest),
-      checkin:getRandomArrayElement(time),
-      checkout:getRandomArrayElement(time),
-      features:getRandomArrayElement(features).split(','),
-      description:getRandomArrayElement(descriptions),
-      photos:getRandomArrayElement(photos).split(','),
+      checkin:getRandomArrayElement(TIMES),
+      checkout:getRandomArrayElement(TIMES),
+      features:getRandomArrayElement(FEATURES),
+      description:getRandomArrayElement(DESCRIPTIONS),
+      photos:getRandomArrayElement(PHOTOS),
       },
     location:
     {x:latitude,
-     y:longitude,
+      y:longitude,
     },
   }
 };
-const keksoBook= new Array(countAd).fill(null).map(()=>createNewAd());*/
+export const createNewAdds =() => new Array(COUNT_ADDS).fill(null).map(()=>createNewAdd());
+
 
 

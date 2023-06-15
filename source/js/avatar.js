@@ -1,6 +1,6 @@
 const fileChooser=document.querySelector('.ad-form__field input[type=file]');
 const previewImg=document.querySelector('#avatar__img');
-console.log(fileChooser);
+
 const fileTypes=['jpg','gif','ipeg','png']
 
 fileChooser.addEventListener('change',()=>{

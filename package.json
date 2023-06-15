@@ -23,7 +23,7 @@
   "scripts": {
     "start": "browser-sync start --server \"build/\" --no-ui --files \"source/**/*.js\"",
     "test": "eslint js/",
-    "build": "webpack --mode production"
+    "build": "webpack --mode development"
   },
   "engines": {
     "node": ">=12.0.0"

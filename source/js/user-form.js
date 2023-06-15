@@ -22,7 +22,7 @@ mapSelects.forEach((select)=>{
 });
 };
   const formsAvilable=()=>{
-     formaAd.classList.remove('ad-form--disabled');
+    formaAd.classList.remove('ad-form--disabled');
     formaMap.classList.remove('map-filters--disabled');
     adFieldsets.forEach((fieldset)=>{
         fieldset.disabled=false;
