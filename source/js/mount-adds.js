@@ -6,9 +6,9 @@ export const mountAdd = (point) =>{
   const cardAdd =template.cloneNode(true);
   cardAdd.children[0].src =point.author.avatar;
   cardAdd.children[1].textContent =point.offer.title;
-  cardAdd.children[2].textContent =`lat:${point.location.x} lng:${point.location.y}`;
+  cardAdd.children[2].textContent =`lat:${point.location.lat} lng:${point.location.lng}`;
 
-  const priceNumber =point.offer.price.replace(/[^0-9]/g,"");
+  const priceNumber =point.offer.price;
   cardAdd.children[3].textContent =`${priceNumber} ₽/ночь`;
   if(point.offer.type==='palace'){
     cardAdd.children[4].textContent = 'Дворец';
@@ -22,29 +22,37 @@ export const mountAdd = (point) =>{
   cardAdd.children[5].textContent =`${point.offer.rooms} комнаты для ${point.offer.guests} гостей`;
   cardAdd.children[6].textContent =`Заезд после ${point.offer.checkin}, выезд до ${point.offer.checkout}`;
 
-  const featuresArray =point.offer.features.split(',');
-  let ul =cardAdd.children[7];
-  ul.innerHTML ='';
-  featuresArray.forEach((feature) =>{
-    let li =document.createElement('li');
-    li.className=`popup__feature popup__feature--${feature}`;
-    ul.append(li);
-  });
+  const featuresArray =point.offer.features;
+    if(featuresArray){
+    let ul =cardAdd.children[7];
+    ul.innerHTML ='';
+    featuresArray.forEach((feature) =>{
+      let li =document.createElement('li');
+      li.className=`popup__feature popup__feature--${feature}`;
+      ul.append(li);
+    });
+  }else{
+    let ul =cardAdd.children[7];
+    ul.innerHTML ='';
+  }
 
   cardAdd.children[8].textContent = point.offer.description;
 
-  cardAdd.children[9].innerHTML = '';
-  const photosAdress =point.offer.photos.split(',');
-  photosAdress.forEach((photoAdress) =>{
-    const imgAdd=document.createElement('img');
-    imgAdd.classList.add('popup__photo');
-    imgAdd.style.width ='45px';
-    imgAdd.style.height='40px';
-    imgAdd.alt ="Фотография жилья";
-    imgAdd.src =photoAdress;
-    cardAdd.children[9].append(imgAdd);
-  });
-  console.log(cardAdd) ;
+  const photosAdresses =point.offer.photos;
+  if(photosAdresses){
+    cardAdd.children[9].innerHTML = '';
+    photosAdresses.forEach((photoAdress) =>{
+      const imgAdd=document.createElement('img');
+      imgAdd.classList.add('popup__photo');
+      imgAdd.style.width ='45px';
+      imgAdd.style.height='40px';
+      imgAdd.alt ="Фотография жилья";
+      imgAdd.src =photoAdress;
+      cardAdd.children[9].append(imgAdd);
+    });
+  }else{
+    cardAdd.children[9].innerHTML = '';
+  }
   return cardAdd;
 };
 

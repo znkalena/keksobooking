@@ -1,9 +1,5 @@
-import '../js/forma-selectroom.js';
-import '../js/forma-title.js';
-import '../js/forma-checktime.js';
-import '../js/forma-selecttype.js';
-import { showError } from "./message-error.js";
-import { showSuccess } from './message-succes.js';
+import { postFetch } from "./fetch.js";
+
 
 const formaAd=document.querySelector('.ad-form');
 const adFieldsets=formaAd.querySelectorAll('fieldset');
@@ -37,10 +33,9 @@ formsDisable();
 forma.addEventListener('submit',(evt)=>{
   evt.preventDefault();
   const formData=new FormData(evt.target);
-  fetch(' https://23.javascript.pages.academy/keksobooking',{method:'POST',body:formData,})
-  .then(()=>{showSuccess('форма отправлена')})
-  .catch(()=>{showError('error')})
+  console.log(formData)
+  postFetch(formData);
 });
 
 
-export{formsAvilable,formaAd};
+export{formsAvilable};

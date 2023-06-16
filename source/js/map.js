@@ -1,19 +1,15 @@
-import {createNewAdds } from './create-randomarray.js';
 import {formsAvilable} from './user-form.js';
 import {createPopup} from './createpopup.js';
 import { mountAdd } from './mount-adds.js';
-
-
-const listAdds = createNewAdds();
-console.log(listAdds);
+import { getFetch } from './fetch.js';
 
 const map =L.map('map-canvas')
 .on('load', () => {
   formsAvilable();
 })
   .setView({
-    lat: 59.92749,
-    lng: 30.31127,
+    lat: 35.679549,
+    lng: 137.711081,
   }, 10);
 
   L.tileLayer(
@@ -31,8 +27,8 @@ const map =L.map('map-canvas')
 
   const mainPinMarker = L.marker(
     {
-      lat: 59.96831,
-      lng: 30.31748,
+      lat: 35.679549,
+      lng: 139.711748,
     },
     {
       draggable: true,
@@ -50,28 +46,36 @@ const map =L.map('map-canvas')
   mainPinMarker.addTo(map)
   .bindPopup(createPopup(adress));
 
+  const getMarkers =(listAdds) =>{
+    listAdds.forEach((point) =>{
+      const icon = L.icon({
+        iconUrl: 'https://assets.htmlacademy.ru/content/intensive/javascript-1/demo/interactive-map/pin.svg',
+        iconSize: [40, 40],
+        iconAnchor: [20, 40],
+      });
 
-  listAdds.forEach((point) =>{
-    const icon = L.icon({
-      iconUrl: 'https://assets.htmlacademy.ru/content/intensive/javascript-1/demo/interactive-map/pin.svg',
-      iconSize: [40, 40],
-      iconAnchor: [20, 40],
-    });
+    const marker=L.marker(
+      {
+        lat:point.location.lat,
+        lng:point.location.lng,
+      },
+      {
+        icon,
+      }
+    );
 
-  const marker=L.marker(
-    {
-      lat:point.location.x,
-      lng:point.location.y,
-    },
-    {
-      icon,
+    marker
+    .addTo(map)
+    .bindPopup(mountAdd(point));
+  });
+  }
+
+  getFetch(
+    (dataAdds)=>{
+      const listAdds=dataAdds.slice(0,10);
+    getMarkers(listAdds);
     }
-  );
-
-  marker
-  .addTo(map)
-  .bindPopup(mountAdd(point));
-});
+  )
 
 
 

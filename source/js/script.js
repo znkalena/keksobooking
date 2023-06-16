@@ -10,4 +10,6 @@ import './user-form.js';
 import './message-error.js';
 import './message-succes.js';
 import './createpopup.js';
+import './fetch.js';
+
 
