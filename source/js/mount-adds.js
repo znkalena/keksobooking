@@ -4,7 +4,12 @@ const template = document.querySelector('#card')
 
 export const mountAdd = (point) =>{
   const cardAdd =template.cloneNode(true);
-  cardAdd.children[0].src =point.author.avatar;
+  if(point.author.avatar){
+    cardAdd.children[0].src =point.author.avatar;
+  }else{
+    cardAdd.children[0].src ='';
+  }
+
   cardAdd.children[1].textContent =point.offer.title;
   cardAdd.children[2].textContent =`lat:${point.location.lat} lng:${point.location.lng}`;
 

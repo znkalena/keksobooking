@@ -1,4 +1,4 @@
-import { postFetch } from "./fetch.js";
+import { sendData } from "./fetch.js";
 
 
 const formaAd=document.querySelector('.ad-form');
@@ -32,9 +32,8 @@ formsDisable();
 
 forma.addEventListener('submit',(evt)=>{
   evt.preventDefault();
-  const formData=new FormData(evt.target);
-  console.log(formData)
-  postFetch(formData);
+  const formData=new FormData(formaAd);
+  sendData(formData);
 });
 
 

@@ -11,7 +11,6 @@ inputPrice.oninput = function(evt){
     if(valueLength>MAX_LENGTH){
     inputPrice.setCustomValidity('цена не может быть больше 1000000 рублей' );
     submitButton.disabled =true;
-
     }
     else{
       inputPrice.setCustomValidity('');
@@ -29,7 +28,7 @@ const minPrice={
   };
 
 const onCelectChange=()=>{
-
+  inputPrice.value='';
     for(let i=0;i<=3;i++){
       if(optionsType[i].selected){
     const name=optionsType[i].value;

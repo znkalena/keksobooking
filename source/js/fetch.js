@@ -1,13 +1,14 @@
-
 import { showError } from "./message-error.js";
 import { showSuccess } from './message-succes.js';
 
+
 const url='https://23.javascript.pages.academy/keksobooking';
 
-export const getFetch=(sucсess)=>{
+export const getData=(sucсess)=>{
     fetch(`${url}/data`,
-  {method:'Get',
-  credentials: 'same-origin',
+  {
+    method:'Get',
+    credentials: 'same-origin',
   }
   )
 .then((response)=>{
@@ -19,20 +20,34 @@ throw new Error(`${response.status} ${response.statusText}`)
 .then((dataAdds)=>{
   sucсess(dataAdds);
 })
-.catch((Error)=>{
-  console.log(Error);})
+.catch(()=>{
+  console.log('Error');})
 };
 
-export const postFetch =(formData) => {
-  fetch(url,{
-    method:'POST',
-    body:formData,
-  }
-  )
-  .then(()=>{
-    showSuccess('форма отправлена');
+
+export const sendData = (body) => {
+    fetch('https://23.javascript.pages.academy/keksobooking', {
+    method: 'POST',
+    body,
   })
-  .catch(()=>{
-    showError('error');
-  })
-}
+    .then((response) => {
+      console.log(response.status);
+      if (response.ok) {
+        showSuccess('good');
+        body.delete = 'true';
+      } else {
+        showError('Не удалось отправить форму. Попробуйте ещё раз');
+      }
+    })
+    .catch(() => {
+      showError('Не удалось отправить форму. Попробуйте ещё раз');
+    });
+};
+
+
+
+
+
+
+
+

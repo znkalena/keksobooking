@@ -11,5 +11,7 @@ import './message-error.js';
 import './message-succes.js';
 import './createpopup.js';
 import './fetch.js';
+import './avatar.js';
+import './rank-data.js';
 
 

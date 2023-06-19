@@ -1,15 +1,18 @@
 import {formsAvilable} from './user-form.js';
 import {createPopup} from './createpopup.js';
 import { mountAdd } from './mount-adds.js';
-import { getFetch } from './fetch.js';
+import { getData } from './fetch.js';
+import { getSimilarList } from './rank-data.js';
+
+const formFilter =document.querySelector('.map__filters');
 
 const map =L.map('map-canvas')
 .on('load', () => {
   formsAvilable();
 })
   .setView({
-    lat: 35.679549,
-    lng: 137.711081,
+    lat: 35.6895,
+    lng: 139.692,
   }, 10);
 
   L.tileLayer(
@@ -46,6 +49,7 @@ const map =L.map('map-canvas')
   mainPinMarker.addTo(map)
   .bindPopup(createPopup(adress));
 
+
   const getMarkers =(listAdds) =>{
     listAdds.forEach((point) =>{
       const icon = L.icon({
@@ -63,20 +67,27 @@ const map =L.map('map-canvas')
         icon,
       }
     );
-
     marker
     .addTo(map)
     .bindPopup(mountAdd(point));
   });
-  }
+  };
 
-  getFetch(
+  /* getData(
     (dataAdds)=>{
       const listAdds=dataAdds.slice(0,10);
     getMarkers(listAdds);
     }
-  )
+  );*/
+
+  formFilter.addEventListener('change',() =>{
+    getData(
+      (dataAdds)=>{
+        const listAdds=getSimilarList(dataAdds);
+      getMarkers(listAdds);
+      }
+    );
+  })
 
 
 
-  //mainPinMarker.remove();
