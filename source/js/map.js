@@ -6,6 +6,8 @@ import { getSimilarList } from './rank-data.js';
 
 const formFilter =document.querySelector('.map__filters');
 
+const RENDER_DELAY = 500;
+
 const map =L.map('map-canvas')
 .on('load', () => {
   formsAvilable();
@@ -49,8 +51,9 @@ const map =L.map('map-canvas')
   mainPinMarker.addTo(map)
   .bindPopup(createPopup(adress));
 
-
+  const markers =[];
   const getMarkers =(listAdds) =>{
+    removeMarkers(markers);
     listAdds.forEach((point) =>{
       const icon = L.icon({
         iconUrl: 'https://assets.htmlacademy.ru/content/intensive/javascript-1/demo/interactive-map/pin.svg',
@@ -64,30 +67,44 @@ const map =L.map('map-canvas')
         lng:point.location.lng,
       },
       {
+        draggable: true,
+      },
+      {
         icon,
       }
     );
     marker
     .addTo(map)
-    .bindPopup(mountAdd(point));
+    .bindPopup(mountAdd(point),
+    {
+      keepInView: true,
+    }
+    );
+    markers.push(marker);
+    return markers;
   });
   };
 
-  /* getData(
+  const removeMarkers =(markers) =>{
+    markers.forEach(marker =>marker.remove());
+  }
+
+  const setFilterClick =(cb) =>{
+    formFilter.addEventListener('change',() =>{
+      getData(
+      (dataAdds)=>{
+        const listAdds=getSimilarList(dataAdds);
+        cb(listAdds);
+    })
+  });
+  }
+  setFilterClick(_.debounce((listAdds) =>getMarkers(listAdds),RENDER_DELAY))
+
+/* getData(
     (dataAdds)=>{
       const listAdds=dataAdds.slice(0,10);
     getMarkers(listAdds);
     }
   );*/
-
-  formFilter.addEventListener('change',() =>{
-    getData(
-      (dataAdds)=>{
-        const listAdds=getSimilarList(dataAdds);
-      getMarkers(listAdds);
-      }
-    );
-  })
-
 
 

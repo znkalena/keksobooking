@@ -60,6 +60,5 @@ const compareAdds=(addA,addB)=>{
 
 export const getSimilarList =(data) =>{
     const similarList= data.slice().sort(compareAdds).slice(0,COUNT_ADDS);
-    console.log(similarList);
     return similarList;
   };
